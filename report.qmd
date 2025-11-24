@@ -1,0 +1,17 @@
+---
+title: "FASTA Metrics Report"
+format:
+  html:
+    output-file: report.html
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-folding: show
+    smooth-scroll: true
+    css: style.css
+execute:
+  echo: false
+editor: visual
+---
+
+# Overview
