@@ -1,0 +1,32 @@
+name: snakemake-exam
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # Snakemake
+  - snakemake-minimal >=9.7.1
+
+  # Python + packages
+  - python
+  - biopython
+  - pandas
+
+  # SeqKit (usado en validate_fasta y gc_content)
+  - seqkit
+
+  # Quarto
+  - quarto
+
+  # R + packages usados en plot_stats.R
+  - r-base
+  - r-ggplot2
+  - r-ggridges
+  - r-ggbeeswarm
+  - r-cowplot
+  - r-dplyr
+  - r-tidyverse
+  - r-readr
+  - r-pheatmap
+  - r-knitr
+  - r-rmarkdown
+
