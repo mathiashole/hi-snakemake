@@ -6,18 +6,18 @@ dependencies:
   # Snakemake
   - snakemake-minimal >=9.7.1
 
-  # Python + packages
+  # Python and packages
   - python
   - biopython
-  - pandas
+  - pandas # dataframe
 
-  # SeqKit (usado en validate_fasta y gc_content)
+  # SeqKit gc and validation
   - seqkit
 
-  # Quarto
+  # Quarto web page
   - quarto
 
-  # R + packages usados en plot_stats.R
+  # R and packages used in plot_stats.R and report.qmd
   - r-base
   - r-ggplot2
   - r-ggridges
