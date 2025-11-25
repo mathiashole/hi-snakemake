@@ -32,6 +32,8 @@ rule infoseq_stats:
         infoseq {input} -only -name -length -pgc | awk 'BEGIN {{OFS="\\t"; print "seq_id","length","gc"}} NR>1 {{print $1,$2,$3}}' > {output}
         """
 
+# combine all stat table per multifasta
+
 rule combine_tables:
     input:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES)
