@@ -1,3 +1,5 @@
+configfile: "config/config.yaml"
+
 rule validate_fasta:
     input:
         fasta="data/{fname}.fasta"
