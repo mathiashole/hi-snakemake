@@ -33,3 +33,12 @@ rule gc_content:
         seqkit fx2tab -g -n -i {input.fasta} > {output.tsv}
         """
 
+rule infoseq_stats:
+    input:
+        "data/{fname}.fasta"
+    output:
+        "results/tables/{fname}_stats.tsv"
+    shell:
+        """
+        infoseq {input} -only -name -length -pgc | awk 'BEGIN {{OFS="\\t"; print "seq_id","length","gc"}} NR>1 {{print $1,$2,$3}}' > {output}
+        """
