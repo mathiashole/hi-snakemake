@@ -3,7 +3,7 @@ configfile: "config/config.yaml" # extract main information similar to arguments
 
 FNAMES = glob_wildcards("data/{fname}.fasta").fname # search all file that contain this structure "data/{X}.fasta"
 
-# main rule, call all rules
+# main rule; call all rules
 rule all:
     input:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES),
@@ -11,7 +11,7 @@ rule all:
         "results/plots/summary_plot.pdf",
         "results/report.html"
 
-rule validate_fasta:
+rule validate_fasta: # short validation and make main stat
     input:
         fasta="data/{fname}.fasta"
     output:
@@ -31,6 +31,7 @@ rule gc_content:
         seqkit fx2tab -g -n -i {input.fasta} > {output.tsv}
         """
 
+# this rule calculate gc and length of sequence
 rule infoseq_stats:
     input:
         "data/{fname}.fasta"
