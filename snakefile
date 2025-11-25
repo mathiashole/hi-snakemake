@@ -42,3 +42,17 @@ rule infoseq_stats:
         """
         infoseq {input} -only -name -length -pgc | awk 'BEGIN {{OFS="\\t"; print "seq_id","length","gc"}} NR>1 {{print $1,$2,$3}}' > {output}
         """
+
+rule combine_tables:
+    input:
+        expand("results/tables/{fname}_stats.tsv", fname=FNAMES)
+    output:
+        "results/tables/combined_table.tsv"
+    shell:
+        """
+        (echo -e "file\tseq_id\tlength\tgc";
+        for f in {input}; do
+            fname=$(basename "$f" _stats.tsv);
+            tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}';
+        done) > {output}
+        """
