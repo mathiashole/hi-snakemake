@@ -1,4 +1,7 @@
+
 configfile: "config/config.yaml"
+
+FNAMES = glob_wildcards("data/{fname}.fasta").fname
 
 rule validate_fasta:
     input:
