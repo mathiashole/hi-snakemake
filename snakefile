@@ -46,7 +46,7 @@ rule combine_tables:
             tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}';
         done) > {output}
         """
-
+# create gc and length plot in pdf format
 rule plot_stats:
     input:
         "results/tables/combined_table.tsv"
