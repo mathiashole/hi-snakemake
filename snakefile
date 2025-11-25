@@ -1,7 +1,7 @@
 
-configfile: "config/config.yaml"
+configfile: "config/config.yaml" # extract main information similar to arguments
 
-FNAMES = glob_wildcards("data/{fname}.fasta").fname
+FNAMES = glob_wildcards("data/{fname}.fasta").fname # search all file that contain this structure "data/{X}.fasta"
 
 # main rule, call all rules
 rule all:
