@@ -3,6 +3,16 @@ configfile: "config/config.yaml"
 
 FNAMES = glob_wildcards("data/{fname}.fasta").fname
 
+# main rule, call all rules
+rule all:
+    input:
+        expand("results/qc/{fname}.validated.txt", fname=FNAMES),
+        expand("results/tables/{fname}_gc.tsv", fname=FNAMES),
+        expand("results/tables/{fname}_nuc.tsv", fname=FNAMES),
+        "results/tables/combined_table.tsv",
+        "results/plots/summary_plot.pdf",
+        "results/report.html"
+
 rule validate_fasta:
     input:
         fasta="data/{fname}.fasta"
