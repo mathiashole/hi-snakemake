@@ -21,16 +21,6 @@ rule validate_fasta: # short validation and make main stat
         seqkit stats {input.fasta} > {output.txt}
         """
 
-rule gc_content:
-    input:
-        fasta="data/{fname}.fasta"
-    output:
-        tsv="results/tables/{fname}_gc.tsv"
-    shell:
-        """
-        seqkit fx2tab -g -n -i {input.fasta} > {output.tsv}
-        """
-
 # this rule calculate gc and length of sequence
 rule infoseq_stats:
     input:
