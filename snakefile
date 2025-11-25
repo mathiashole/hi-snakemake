@@ -33,7 +33,6 @@ rule infoseq_stats:
         """
 
 # combine all stat table per multifasta
-
 rule combine_tables:
     input:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES)
@@ -47,3 +46,11 @@ rule combine_tables:
             tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}';
         done) > {output}
         """
+
+rule plot_stats:
+    input:
+        "results/tables/combined_table.tsv"
+    output:
+        "results/plots/summary_plot.pdf"
+    script:
+        "scripts/plot_stats.R"
