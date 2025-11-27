@@ -1,0 +1,38 @@
+
+
+Descripción del Pipeline y Principios de Ejecución mediante Snakemake
+
+El workflow implementado se organiza mediante Snakemake, un sistema de gestión de flujos reproducibles ampliamente utilizado en bioinformática. Snakemake permite estructurar un conjunto de tareas dependientes entre sí, garantizando reproducibilidad, escalabilidad y actualización automática de resultados. El enfoque principal se basa en describir qué archivos deben obtenerse y dejar que Snakemake determine cómo generarlos, ejecutando solamente los pasos necesarios en función de las dependencias entre reglas.
+
+1. Configuración del entorno y detección automática de datos
+
+El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función glob_wildcards() para detectar de manera automática todos los archivos FASTA presentes en el directorio data/. Este mecanismo permite que el análisis incorpore nuevos archivos sin necesidad de modificar el Snakefile, haciendo al workflow adaptable y escalable. Asimismo, los parámetros definidos en el archivo de configuración permiten controlar aspectos del análisis (por ejemplo, el tipo de frecuencia nucleotídica a calcular) sin editar el código del pipeline.
+
+2. Definición del objetivo global del workflow
+
+La regla principal (rule all) especifica los archivos que representan los resultados finales del análisis: tablas individuales y combinadas, gráficos en formato PDF, salidas del análisis de frecuencia de nucleótidos y un reporte final en formato HTML. Snakemake construye automáticamente un grafo acíclico dirigido (DAG) que describe todas las dependencias necesarias para producir dichos resultados. De esta forma, el flujo se ejecuta de manera ordenada, asegurando que cada paso se lleve a cabo únicamente cuando las entradas requeridas están disponibles.
+
+3. Validación y procesamiento inicial de archivos FASTA
+
+Las primeras reglas del workflow (validate_fasta e infoseq_stats) operan sobre cada archivo FASTA de forma individual y paralizable. Snakemake identifica que estas tareas son independientes entre sí y las ejecuta en paralelo cuando los recursos lo permiten. La validación mediante seqkit y la obtención de estadísticas básicas mediante infoseq constituyen el preprocesamiento esencial de los datos de entrada.
+
+4. Integración de resultados intermedios
+
+Una vez generadas las tablas individuales, la regla combine_tables consolida toda la información en un único archivo tabular. Snakemake asegura que esta regla no se ejecute hasta que se hayan producido todas las tablas de entrada. Asimismo, si alguna tabla cambia o se agrega un FASTA nuevo, únicamente las etapas afectadas serán reevaluadas, evitando la re-ejecución completa del flujo.
+
+5. Análisis de frecuencias de nucleótidos
+
+El pipeline incluye la posibilidad de calcular frecuencias di- y trinucleotídicas mediante la regla frequency_analysis, la cual se parametriza en función del archivo de configuración. Snakemake expande automáticamente esta regla para cada tipo de análisis solicitado, generando las tablas correspondientes. La modularidad de esta sección permite incorporar fácilmente nuevos tipos de métricas sin alterar la estructura principal del workflow.
+
+6. Generación de gráficos
+
+Mediante las reglas plot_stats y plot_frequency, Snakemake ejecuta scripts en R que producen visualizaciones asociadas a los datos combinados y a las frecuencias nucleotídicas. Estas reglas dependen explícitamente de las tablas previas, por lo que Snakemake garantiza su actualización solo cuando los datos hayan cambiado. Este comportamiento incrementa significativamente la eficiencia del pipeline, especialmente en análisis iterativos.
+
+7. Construcción del reporte final
+
+El workflow concluye con la compilación de un reporte en formato HTML mediante Quarto. Snakemake supervisa que tanto los resultados numéricos como las figuras necesarias estén disponibles previo a la generación del reporte. Gracias al manejo automático de dependencias, cualquier modificación en los datos de entrada o en los pasos previos resulta en la actualización del documento final, asegurando consistencia entre análisis y reporte.
+
+Conclusión
+
+El pipeline desarrollado utiliza Snakemake como herramienta central para garantizar un análisis reproducible, modular y eficiente. Mediante la definición explícita de reglas, entradas y salidas, Snakemake automatiza la ejecución ordenada del flujo, paraleliza tareas independientes, actualiza únicamente los pasos necesarios ante cambios en los datos, y facilita la integración de múltiples herramientas externas como seqkit, infoseq, R y Quarto. El resultado es un sistema robusto, escalable y fácilmente extensible para el procesamiento automatizado de archivos FASTA y la generación de reportes analíticos.
+
