@@ -18,4 +18,4 @@ y luego
 echo 'export PATH="/ruta actual/.pixi/bin:$PATH"' >> ~/.bashrc # agrega pixi al PATH
 source ~/.bashrc # recarga el .bashrc
 ```
-Esto permite usar el comando `pixi` en cualquier lugar de la terminal.
+Esto permite usar el comando `pixi` en cualquier lugar de la terminal. El método de instalación varía según el sistema operativo, para más detalles visita **pixi**[el sitio de pixi](https://pixi.sh/#/install)
