@@ -43,6 +43,16 @@ El workflow implementado se organiza mediante Snakemake, un sistema de gestión 
 
 Este workflow se crea a partir de ciertos análisis de mi maestría, los cuales son utilizados durante el proyecto para crear un sitio web. Sin enbargo, no se incluye la totalidad de los análisis originales.
 
+Este workflow consta de 8 `rules`, una `rule` es una unidad que define un paso en el workflow. Se le debe especificar al menos un `input`, `output` y `comando` o `función` que debe ejecutar. Es similar a una función ya que encapsula y se le debe pasar ciertos argumentos, pero tiene un proposito distinto a una función. Las rules que utilizamos son:
+- all
+- validate_fasta
+- infoseq_stat
+- combine_tables
+- plot_stats
+- frequency_analysis
+- plot_frequency
+- report
+
 1. Configuración del entorno y detección automática de datos
 
 El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función glob_wildcards() para detectar de manera automática todos los archivos FASTA presentes en el directorio data/. Este mecanismo permite que el análisis incorpore nuevos archivos sin necesidad de modificar el Snakefile, haciendo al workflow adaptable y escalable. Asimismo, los parámetros definidos en el archivo de configuración permiten controlar aspectos del análisis (por ejemplo, el tipo de frecuencia nucleotídica a calcular) sin editar el código del pipeline.
