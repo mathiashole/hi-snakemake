@@ -10,8 +10,8 @@ El pipeline utiliza Snakemake para la gestión de flujos de trabajo y Pixi para 
 
 Pixi es un gestor de entornos simple y rápido, similar a Conda, que garantiza que Snakemake y todas las dependencias del pipeline funcionen igual en cualquier computadora.
 
-## Instalar Pixi
-
+### Instalar Pixi
+Para instalar Pixi, ejecuta el siguiente comando en la terminal
 ```{bash, eval = FALSE}
 curl -fsSL https://pixi.sh/install.sh | bash
 ```
@@ -22,4 +22,11 @@ y luego
 echo 'export PATH="/ruta actual/.pixi/bin:$PATH"' >> ~/.bashrc # agrega pixi al PATH
 source ~/.bashrc # recarga el .bashrc
 ```
+
 Esto permite usar el comando `pixi` en cualquier lugar de la terminal. El método de instalación varía según el sistema operativo, para más detalles visita [pixi](https://pixi.sh/#/install)
+
+## Snakemake
+
+utilizaremos Snakemake para la orquestación del workflow y Conda para la gestión de dependencias.
+
+### Instalar Snakemake
