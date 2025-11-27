@@ -2,6 +2,10 @@
 
 pipeline en Snakemake para validar archivos FASTA, calcular GC%, calcular largo de secuencia, obtener composición nucleotídica, combinar las tablas y generar un reporte automático en Quarto creando una web.
 
+## Entorno de ejecución
+
+El pipeline utiliza Snakemake para la gestión de flujos de trabajo y Pixi para la gestión de entornos reproducibles. Asegúrate de tener ambos instalados antes de ejecutar el pipeline. Asimismo, recomendamos trabajar en visual studio code dado que facilita la edición y ejecución de scripts. Para poder ver la pagina web generada, es necesario tener la extension de live server instalada en VSCode.
+
 ## Pixi entorno reproducible
 
 Pixi es un gestor de entornos simple y rápido, similar a Conda, que garantiza que Snakemake y todas las dependencias del pipeline funcionen igual en cualquier computadora.
