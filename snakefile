@@ -71,3 +71,12 @@ rule plot_stats:
         "results/plots/summary_plot.pdf"
     script:
         "scripts/plot_stats.R"
+
+# create frequency plot in pdf format
+rule plot_frequency:
+    input:
+        "results/frequency/{atype}_combined.tsv"
+    output:
+        "results/plots/{atype}_combined.pdf"
+    script:
+        "scripts/plot_frequency.R"
