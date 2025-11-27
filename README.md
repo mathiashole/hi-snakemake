@@ -27,6 +27,18 @@ Esto permite usar el comando `pixi` en cualquier lugar de la terminal. El métod
 
 ## Snakemake
 
-utilizaremos Snakemake para la orquestación del workflow y Conda para la gestión de dependencias.
+utilizaremos Snakemake para la orquestación del workflow, el mismo, requiere varias herramientas, incluyendo Python, SeqKit, Quarto, y R (`ggplot2`, `dplyr`, `seqinr`, `tidyverse`, etc).
 
-### Instalar Snakemake
+### Instalar todas las dependencias
+
+La configuración está contenida en el archivo `environment.yaml`. Para configurar e instalar todas las herramientas automáticamente, ejecuta el siguientes comandos:
+```{bash, eval = FALSE}
+pixi init --import environment.yaml
+```
+
+y luego
+```{bash, eval = FALSE}
+pixi shell
+``` 
+
+Esto creará los entornos necesarios para ejecutar el pipeline.
