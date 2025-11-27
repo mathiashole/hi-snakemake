@@ -3,7 +3,9 @@ configfile: "config/config.yaml" # extract main information similar to arguments
 
 FNAMES = glob_wildcards("data/{fname}.fasta").fname # search all file that contain this structure "data/{X}.fasta"
 
-ANALYSIS = config["analysis"]
+FASTAS = expand("data/{fname}.fasta", fname=FNAMES) # list of all file in data with fasta tag
+
+ANALYSIS = config["analysis"] #extract analysis of config
 
 # main rule; call all rules
 rule all:
