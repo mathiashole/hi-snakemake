@@ -50,6 +50,19 @@ rule combine_tables:
             tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}'; # add filename as first column
         done) > {output} # redirect output to combined file
         """
+# Frequency analysis rule
+rule frequency_analysis:
+    input:
+        FASTAS
+    output:
+        "results/frequency/{atype}_combined.tsv"
+    shell:
+        """
+        Rscript scripts/allFrequency.R --{wildcards.atype} {input} --output results/frequency/{wildcards.atype}
+
+        mv results/frequency/{wildcards.atype}_{wildcards.atype}_frequencies.tsv {output}
+        """
+
 # create gc and length plot in pdf format
 rule plot_stats:
     input:
