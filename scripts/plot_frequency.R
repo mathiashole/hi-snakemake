@@ -1,7 +1,9 @@
+suppressPackageStartupMessages({
 library(seqinr)
 library(ggplot2)
 library(ggfortify)
 library(tidyverse)
+})
 
 df <- read.table(snakemake@input[[1]], header=TRUE, sep="\t")
 
