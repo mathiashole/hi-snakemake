@@ -37,9 +37,11 @@ format:
 26 Octubre, 2025
 </div>
 
-Descripción del Pipeline y Principios de Ejecución mediante Snakemake
+# Descripción del Pipeline y Principios de Ejecución mediante Snakemake
 
-El workflow implementado se organiza mediante Snakemake, un sistema de gestión de flujos reproducibles ampliamente utilizado en bioinformática. Snakemake permite estructurar un conjunto de tareas dependientes entre sí, garantizando reproducibilidad, escalabilidad y actualización automática de resultados. El enfoque principal se basa en describir qué archivos deben obtenerse y dejar que Snakemake determine cómo generarlos, ejecutando solamente los pasos necesarios en función de las dependencias entre reglas.
+El workflow implementado se organiza mediante Snakemake, un sistema de gestión de flujos reproducibles el cual se utiliza para analisis de bioinformática. Snakemake permite estructurar un conjunto de tareas dependientes entre sí, garantizando reproducibilidad, escalabilidad y actualización automática de resultados. El enfoque principal se basa en describir qué archivos deben ingresar y cuales deben obtenerse y dejar que Snakemake determine cómo generarlos, ejecutando solamente los pasos necesarios en función de las dependencias entre reglas.
+
+Este workflow se crea a partir de ciertos análisis de mi maestría, los cuales son utilizados durante el proyecto para crear un sitio web. Sin enbargo, no se incluye la totalidad de los análisis originales.
 
 1. Configuración del entorno y detección automática de datos
 
