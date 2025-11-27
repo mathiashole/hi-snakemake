@@ -1,4 +1,8 @@
+# Snakefile for processing FASTA files: validation, stats calculation, frequency analysis, and report generation.
+# Author: Mathias Mangino
+# Date: 2025
 
+# Load configuration file
 configfile: "config/config.yaml" # extract main information similar to arguments
 
 FNAMES = glob_wildcards("data/{fname}.fasta").fname # search all file that contain this structure "data/{X}.fasta"
