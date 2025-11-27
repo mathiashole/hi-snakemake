@@ -44,11 +44,11 @@ rule combine_tables:
         "results/tables/combined_table.tsv"
     shell:
         """
-        (echo -e "file\tseq_id\tlength\tgc";
-        for f in {input}; do
-            fname=$(basename "$f" _stats.tsv);
-            tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}';
-        done) > {output}
+        (echo -e "file\tseq_id\tlength\tgc"; # create Header of combined file
+        for f in {input}; do # iterate over input files
+            fname=$(basename "$f" _stats.tsv); # extract filename without path and suffix
+            tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}'; # add filename as first column
+        done) > {output} # redirect output to combined file
         """
 # create gc and length plot in pdf format
 rule plot_stats:
