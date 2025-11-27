@@ -7,3 +7,15 @@ pipeline en Snakemake para validar archivos FASTA, calcular GC%, calcular largo 
 Pixi es un gestor de entornos simple y rápido, similar a Conda, que garantiza que Snakemake y todas las dependencias del pipeline funcionen igual en cualquier computadora.
 
 ## Instalar Pixi (1 comando)
+
+```{bash, eval = FALSE}
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+y luego
+
+```{bash, eval = FALSE}
+echo 'export PATH="/ruta actual/.pixi/bin:$PATH"' >> ~/.bashrc # agrega pixi al PATH
+source ~/.bashrc # recarga el .bashrc
+```
+Esto permite usar el comando `pixi` en cualquier lugar de la terminal.
