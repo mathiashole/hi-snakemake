@@ -90,42 +90,6 @@ result_combained_data <- data.frame(
   gtc.gac = data[,"gtc"] + data[,"gac"],
 
   tca.tga = data[,"tca"] + data[,"tga"]
-
-  #   result_combained_data <- data.frame(
-  # "File" = data[, genome_col],
-  # "ID" = data[, id_col],
-  # "aaa.ttt" = data[,"aaa"] + data[,"ttt"],
-  # "aag.ctt" = data[,"aag"] + data[,"ctt"],
-  # "aac.gtt" = data[,"aac"] + data[,"gtt"],
-  # "aat.att" = data[,"aat"] + data[,"att"],
-  # "acc.ggt" = data[,"acc"] + data[,"ggt"],
-  # "act.agt" = data[,"act"] + data[,"agt"],
-  # "aga.tct" = data[,"aga"] + data[,"tct"],
-  # "agg.cct" = data[,"agg"] + data[,"cct"],
-  # "ata.tat" = data[,"ata"] + data[,"tat"],
-  # "atc.gat" = data[,"atc"] + data[,"gat"],
-  # "caa.ttg" = data[,"caa"] + data[,"ttg"],
-  # "cag.ctg" = data[,"cag"] + data[,"ctg"],
-  # "cat.atg" = data[,"cat"] + data[,"atg"],
-  # "cac.gtg" = data[,"cac"] + data[,"gtg"],
-  # "cca.tgg" = data[,"cca"] + data[,"tgg"],
-  # "ccc.ggg" = data[,"ccc"] + data[,"ggg"],
-  # "cga.tcg" = data[,"cga"] + data[,"tcg"],
-  # "cta.tag" = data[,"cta"] + data[,"tag"],
-  # "gaa.ttc" = data[,"gaa"] + data[,"ttc"],
-  # "gag.ctc" = data[,"gag"] + data[,"ctc"],
-  # "gat.atc" = data[,"gat"] + data[,"atc"],
-  # "gca.tgc" = data[,"gca"] + data[,"tgc"],
-  # "gga.tcc" = data[,"gga"] + data[,"tcc"],
-  # "ggg.ccc" = data[,"ggg"] + data[,"ccc"],
-  # "gta.tac" = data[,"gta"] + data[,"tac"],
-  # "gtc.gac" = data[,"gtc"] + data[,"gac"],
-  # "taa.tta" = data[,"taa"] + data[,"tta"],
-  # "tag.cta" = data[,"tag"] + data[,"cta"],
-  # "tat.ata" = data[,"tat"] + data[,"ata"],
-  # "tca.tga" = data[,"tca"] + data[,"tga"],
-  # "tga.tca" = data[,"tga"] + data[,"tca"],
-  # "tta.aag" = data[,"tta"] + data[,"aag"]
 )
   } else {
     stop("Invalid tag specified. Use 'di' for dinucleotides or 'tri' for trinucleotides.")
