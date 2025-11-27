@@ -60,9 +60,9 @@ El pipeline inicia declarando un archivo de configuración (config.yaml) y emple
 
 Asimismo, los parámetros definidos en el archivo de configuración denominado **config.yaml** permiten controlar aspectos del análisis (por ejemplo, el tipo de frecuencia nucleotídica a calcular) sin editar el código del pipeline.
 
-2. Definición del objetivo global del workflow
+## 2. Definición global del workflow
 
-La regla principal (rule all) especifica los archivos que representan los resultados finales del análisis: tablas individuales y combinadas, gráficos en formato PDF, salidas del análisis de frecuencia de nucleótidos y un reporte final en formato HTML. Snakemake construye automáticamente un grafo acíclico dirigido (DAG) que describe todas las dependencias necesarias para producir dichos resultados. De esta forma, el flujo se ejecuta de manera ordenada, asegurando que cada paso se lleve a cabo únicamente cuando las entradas requeridas están disponibles.
+La regla principal (rule `all`) especifica los archivos que representan los resultados finales del análisis (`output`), estos son tablas individuales y combinadas, gráficos guardados en formato PDF, salidas del análisis de frecuencia de dinucleótidos, trinucleótidos y un reporte final en formato HTML, asociado a documentos css, imagenes y javascript. Snakemake construye automáticamente un grafo acíclico dirigido (DAG) que describe todas las dependencias necesarias para producir dichos resultados. De esta forma, el flujo se ejecuta de manera ordenada, asegurando que cada paso se lleve a cabo únicamente cuando las entradas requeridas están disponibles.
 
 3. Validación y procesamiento inicial de archivos FASTA
 
