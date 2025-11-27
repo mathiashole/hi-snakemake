@@ -1,8 +1,10 @@
+suppressPackageStartupMessages({
 library(ggplot2)
 library(ggridges)
 library(ggbeeswarm)
 library(cowplot)
 library(dplyr)
+})
 
 df <- read.table(snakemake@input[[1]], header=TRUE, sep="\t")
 
