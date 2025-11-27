@@ -13,6 +13,8 @@ rule all:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES),
         "results/tables/combined_table.tsv",
         "results/plots/summary_plot.pdf",
+        expand("results/frequency/{atype}_combined.tsv", atype=ANALYSIS),
+        expand("results/plots/{atype}_combined.pdf", atype=ANALYSIS),
         "results/report.html"
 
 rule validate_fasta: # short validation and make main stat
