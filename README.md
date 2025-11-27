@@ -40,3 +40,15 @@ pixi shell
 ``` 
 
 Esto creará los entornos necesarios para ejecutar el pipeline.
+
+Una vez dentro del entorno de Pixi y con todas las dependencias instaladas, puedes ejecutar el pipeline de Snakemake.
+## Ejecutar el pipeline
+Para ejecutar el pipeline, asegúrate de estar en el entorno de Pixi y luego ejecuta el siguiente comando en la terminal:
+```{bash, eval = FALSE}
+snakemake --cores 10
+```
+Esto ejecutará el pipeline utilizando 10 núcleos de procesamiento. Puedes ajustar el número de núcleos según la capacidad de tu máquina.
+## Resultados
+Los resultados del análisis se guardarán en la carpeta `results/`, incluyendo tablas de estadísticas y gráficos generados.
+## Visualizar reporte web
+Para visualizar el reporte web generado, abre el archivo `results/report.html` en tu navegador web o utiliza la extensión de Live Server en VSCode para una mejor experiencia. 
