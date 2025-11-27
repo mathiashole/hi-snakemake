@@ -25,11 +25,9 @@ source ~/.bashrc # recarga el .bashrc
 
 Esto permite usar el comando `pixi` en cualquier lugar de la terminal. El método de instalación varía según el sistema operativo, para más detalles visita [pixi](https://pixi.sh/#/install)
 
-## Snakemake
+## Instalar todas las dependencias
 
 utilizaremos Snakemake para la orquestación del workflow, el mismo, requiere varias herramientas, incluyendo Python, SeqKit, Quarto, y R (`ggplot2`, `dplyr`, `seqinr`, `tidyverse`, etc).
-
-### Instalar todas las dependencias
 
 La configuración está contenida en el archivo `environment.yaml`. Para configurar e instalar todas las herramientas automáticamente, ejecuta el siguientes comandos:
 ```{bash, eval = FALSE}
