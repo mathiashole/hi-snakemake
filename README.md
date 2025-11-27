@@ -4,7 +4,7 @@ pipeline en Snakemake para validar archivos FASTA, calcular GC%, calcular largo 
 
 ## Entorno de ejecución
 
-El pipeline utiliza Snakemake para la gestión de flujos de trabajo y Pixi para la gestión de entornos reproducibles. Asegúrate de tener ambos instalados antes de ejecutar el pipeline. Asimismo, recomendamos trabajar en visual studio code dado que facilita la edición y ejecución de scripts. Para poder ver la pagina web generada, es necesario tener la extension de live server instalada en VSCode.
+El pipeline utiliza Snakemake para la gestión de flujos de trabajo y Pixi para la gestión de entornos reproducibles. Asegúrate de tener ambos instalados antes de ejecutar el pipeline. Asimismo, recomendamos trabajar en visual studio code dado que facilita la edición y ejecución de scripts. Para poder ver la pagina web generada, es necesario tener la extension de `live server` instalada en VSCode.
 
 ## Pixi entorno reproducible
 
