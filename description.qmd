@@ -78,9 +78,9 @@ Asimismo, los parámetros definidos en el archivo de configuración denominado *
 
 La regla principal (rule `all`) especifica los archivos que representan los resultados finales del análisis (`output`), estos son tablas individuales y combinadas, gráficos guardados en formato PDF, salidas del análisis de frecuencia de dinucleótidos, trinucleótidos y un reporte final en formato HTML, asociado a documentos css, imagenes y javascript. Snakemake construye automáticamente un grafo acíclico dirigido (DAG) que describe todas las dependencias necesarias para producir dichos resultados. De esta forma, el flujo se ejecuta de manera ordenada, asegurando que cada paso se lleve a cabo únicamente cuando las entradas requeridas están disponibles.
 
-3. Validación y procesamiento inicial de archivos FASTA
+## Validación inicial
 
-Las primeras reglas del workflow (validate_fasta e infoseq_stats) operan sobre cada archivo FASTA de forma individual y paralizable. Snakemake identifica que estas tareas son independientes entre sí y las ejecuta en paralelo cuando los recursos lo permiten. La validación mediante seqkit y la obtención de estadísticas básicas mediante infoseq constituyen el preprocesamiento esencial de los datos de entrada.
+Las primeras dos reglas del workflow (`validate_fasta` e `infoseq_stats`) operan sobre cada archivo FASTA de forma individual y paralizable. Snakemake identifica que estas tareas son independientes entre sí y las ejecuta en paralelo cuando los recursos de la maquina lo permiten. La validación mediante seqkit es (meramente ilustrativa para incorporar otros software en la ejecucion del pipeline, dado que se puede hacer con infoseq), el comando utilizado genera estadisticos generales basicos de cada archivo fasta. Luego, sigue por la rule `infoseq_stats` la cual obtiene estadísticas básicas de cada secuencia dentro de los archivos multi fasta mediante infoseq constituyen el preprocesamiento principal de los datos de entrada.
 
 4. Integración de resultados intermedios
 
