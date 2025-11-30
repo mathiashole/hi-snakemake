@@ -82,9 +82,9 @@ La regla principal (rule `all`) especifica los archivos que representan los resu
 
 Las primeras dos reglas del workflow (`validate_fasta` e `infoseq_stats`) operan sobre cada archivo FASTA de forma individual y paralizable. Snakemake identifica que estas tareas son independientes entre sí y las ejecuta en paralelo cuando los recursos de la maquina lo permiten. La validación mediante seqkit es (meramente ilustrativa para incorporar otros software en la ejecucion del pipeline, dado que se puede hacer con infoseq), el comando utilizado genera estadisticos generales basicos de cada archivo fasta. Luego, sigue por la rule `infoseq_stats` la cual obtiene estadísticas básicas de cada secuencia dentro de los archivos multi fasta mediante infoseq constituyen el preprocesamiento principal de los datos de entrada.
 
-4. Integración de resultados intermedios
+## Integración de resultados intermedios
 
-Una vez generadas las tablas individuales, la regla combine_tables consolida toda la información en un único archivo tabular. Snakemake asegura que esta regla no se ejecute hasta que se hayan producido todas las tablas de entrada. Asimismo, si alguna tabla cambia o se agrega un FASTA nuevo, únicamente las etapas afectadas serán reevaluadas, evitando la re-ejecución completa del flujo.
+Una vez generadas las tablas individuales, con la siguiente rule `combine_tables` se genera una tabla maestra con toda la información en un único archivo en formato tabular. Snakemake asegura que esta regla no se ejecute hasta que se hayan producido todas las tablas de entradas necesarias para generar esta tabla maestra. Asimismo, si alguna tabla cambia o se agrega un FASTA nuevo, únicamente las etapas afectadas serán reevaluadas, evitando la re-ejecución completa del workflow, de esta manera se ahorra capacidad de procesamiento.
 
 5. Análisis de frecuencias de nucleótidos
 
