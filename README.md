@@ -48,7 +48,18 @@ Para ejecutar el pipeline, asegúrate de estar en el entorno de Pixi y luego eje
 snakemake --cores 10
 ```
 Esto ejecutará el pipeline utilizando 10 núcleos de procesamiento. Puedes ajustar el número de núcleos según la capacidad de tu máquina.
+
+Para obtener un reporte detallado de la ejecución del pipeline, puedes agregar la opción `--dag` para generar un gráfico del flujo de trabajo:
+```{bash, eval = FALSE}
+snakemake --cores 10 --dag | dot -Tsvg > dag.svg
+```
+
+generando esta figura `dag.svg` que muestra las dependencias entre las reglas del pipeline.
+
+
+
 ## Resultados
 Los resultados del análisis se guardarán en la carpeta `results/`, incluyendo tablas de estadísticas y gráficos generados.
+
 ## Visualizar reporte web
-Para visualizar el reporte web generado, abre el archivo `results/report.html` en tu navegador web o utiliza la extensión de Live Server en VSCode para una mejor experiencia. 
+Para visualizar el reporte web generado, abre el archivo `results/report.html` en tu navegador web o utiliza la extensión de Live Server en VSCode para una mejor experiencia. Para hacer uso de Live Server, haz clic derecho en el archivo `report.html` y selecciona "Open with Live Server". 
