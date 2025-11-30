@@ -12,6 +12,7 @@ FASTAS = expand("data/{fname}.fasta", fname=FNAMES) # list of all file in data w
 ANALYSIS = config["analysis"] #extract analysis of config
 
 # main rule; call all rules
+# define all output files
 rule all:
     input:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES),
@@ -21,6 +22,7 @@ rule all:
         expand("results/plots/{atype}_combined.pdf", atype=ANALYSIS),
         "results/report.html"
 
+# seqkit validation rule
 rule validate_fasta: # short validation and make main stat
     input:
         fasta="data/{fname}.fasta"
@@ -43,7 +45,8 @@ rule infoseq_stats:
         infoseq {input} -only -name -length -pgc | awk 'BEGIN {{OFS="\\t"; print "seq_id","length","gc"}} NR>1 {{print $1,$2,$3}}' > {output}
         """
 
-# combine all stat table per multifasta
+
+# combine all individual tables into one table with an additional column indicating the source file
 rule combine_tables:
     input:
         expand("results/tables/{fname}_stats.tsv", fname=FNAMES)
@@ -57,7 +60,9 @@ rule combine_tables:
             tail -n +2 "$f" | awk -v name=$fname '{{print name"\t"$0}}'; # add filename as first column
         done) > {output} # redirect output to combined file
         """
+
 # Frequency analysis rule
+# for each analysis type specified in config file
 rule frequency_analysis:
     input:
         FASTAS
@@ -71,6 +76,7 @@ rule frequency_analysis:
         """
 
 # create gc and length plot in pdf format
+#  generate summary plot
 rule plot_stats:
     input:
         "results/tables/combined_table.tsv"
@@ -80,6 +86,7 @@ rule plot_stats:
         "scripts/plot_stats.R"
 
 # create frequency plot in pdf format
+# generate frequency plot for each analysis type
 rule plot_frequency:
     input:
         "results/frequency/{atype}_combined.tsv"
