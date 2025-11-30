@@ -64,7 +64,9 @@ El repositorio contiene el Snakefile (archivo de ejecucion), scripts auxiliares 
 
 ## Configuración del entorno y detección automática de datos
 
-Para el correcto funcionamiento es necesaria la instalación de `Pixi`, una herramienta de gestion de entornos. Asimismo, seguir los pasos especificos del README que se encuentra en el repositorio publico anteriormente mencionado `llamado hi-snakemake`.
+Para el correcto funcionamiento es necesaria la instalación de `Pixi`, una herramienta de gestion de entornos. Asimismo, seguir los pasos especificos del README que se encuentra en el repositorio publico anteriormente mencionado llamado `hi-snakemake`.
+
+Este repositorio trae consigo un archivo `environment.yaml`, este es un archivo en formato YAML usado para administrar entornos de software, más comúnmente para el administrador de paquetes de Conda. Especifica el nombre, las dependencias y los canales del entorno, permitiendo a los usuarios recrear un entorno idéntico en diferentes máquinas. En este contexto, `channels` son los sitios donde Conda descarga los paquetes que necesita para el entorno, son repositorios que contienen programas y librerias. `Dependencies` son los programas y librerias que queremos que se instalen desde estos repositorios.
 
 El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función **glob_wildcards()** para buscar de manera automática todos los archivos que terminan en `.fasta` y que esten presentes en el directorio `data/`. Permitiendo asi, que el análisis incorpore nuevos archivos sin necesidad de modificar el Snakefile, haciendo al workflow adaptable y escalable.
 
