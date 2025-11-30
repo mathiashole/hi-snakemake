@@ -62,7 +62,9 @@ Descargar: wget https://github.com/mathiashole/hi-snakemake/archive/refs/heads/m
 
 El repositorio contiene el Snakefile (archivo de ejecucion), scripts auxiliares (carpeta scripts), config.yaml y environment.yaml. Consulte el README para instalar dependencias (seqkit, infoseq, R/paquetes, Quarto) y las instrucciones de ejecución (p. ej. `snakemake --cores N`).
 
-## 1. Configuración del entorno y detección automática de datos
+## Configuración del entorno y detección automática de datos
+
+Para el correcto funcionamiento es necesaria la instalación de `Pixi`, una herramienta de gestion de entornos. Asimismo, seguir los pasos especificos del README que se encuentra en el repositorio publico anteriormente mencionado `llamado hi-snakemake`.
 
 El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función **glob_wildcards()** para buscar de manera automática todos los archivos que terminan en `.fasta` y que esten presentes en el directorio `data/`. Permitiendo asi, que el análisis incorpore nuevos archivos sin necesidad de modificar el Snakefile, haciendo al workflow adaptable y escalable.
 
