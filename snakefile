@@ -32,6 +32,7 @@ rule validate_fasta: # short validation and make main stat
         """
 
 # this rule calculate gc and length of sequence
+# uses infoseq from emboss package
 rule infoseq_stats:
     input:
         "data/{fname}.fasta"
