@@ -94,3 +94,18 @@ rule plot_frequency:
         "results/plots/{atype}_combined.pdf"
     script:
         "scripts/plot_frequency.R"
+
+# generate report web site using quarto
+rule report:
+    input:
+        table="results/tables/combined_table.tsv",
+        plot="results/plots/summary_plot.pdf",
+        qmd="report.qmd"
+    output:
+        html="results/report.html"
+    shell:
+        """
+        quarto render {input.qmd} --output report.html
+        mv report.html {output.html}
+        mv report_files results/
+        """
