@@ -88,7 +88,11 @@ Una vez generadas las tablas individuales, con la siguiente rule `combine_tables
 
 ## Análisis de frecuencias de nucleótidos
 
-Este pipeline incluye la posibilidad de calcular frecuencias dinucleotídicas y trinucleotídicas mediante la rule "`frequency_analysis`", la cual se parametriza en función del archivo de configuración, de esta manera se selecciona de forma efectiva si se calcula frecuencia de dinucleotíos y/o trinucleotídos. Snakemake expande automáticamente esta regla para cada tipo de análisis solicitado, generando las tablas correspondientes. Esta seccion es donde se hace un uso extendido de **wildcars** tanto para generar la salida de datos (`output`) como para especificar que calculo debe hacer el script, esto le aporta modularidad a la rule permite incorporar fácilmente nuevos analisis sin agregar tantas lineas de codigo. Finalmente, se agrega una linea de codigo para mover los resultaods obtenidos al directorio de resultados, dado que este script guarda el `output` donde estemos ejecutando el pipeline y esto genera una incosistencia segun los argumentos que se le pasaron a las rules.
+Este pipeline incluye la posibilidad de calcular frecuencias dinucleotídicas y trinucleotídicas mediante la regla "`frequency_analysis`", la cual se parametriza a partir del archivo configuración "`config.yaml`". Gracias a esto, Snakemake determina de forma automática si debe calcular dinucleótidos, trinucleótidos o ambos. La regla se expande dinámicamente para cada tipo de análisis solicitado, generando las tablas correspondientes.
+
+En esta sección se utiliza extensivamente el mecanismo de **wildcards**, tanto para definir los archivos de salida (`output`) como para indicar qué tipo de cálculo debe realizar el script. Esto aporta modularidad a la regla y facilita incorporar nuevos tipos de análisis sin necesidad de agregar múltiples líneas adicionales de código.
+
+Finalmente, se incluye una instrucción para mover los resultados generados al directorio de salida del pipeline, ya que el script que llama la regla, guarda los archivos en el directorio de ejecución del snakefile. Este paso asegura consistencia en la estructura de resultados. Además, evita el conflicto con los argumentos que se definieron en la regla.
 
 6. Generación de gráficos
 
