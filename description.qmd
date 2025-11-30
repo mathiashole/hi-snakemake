@@ -84,7 +84,7 @@ Las primeras dos reglas del workflow (`validate_fasta` e `infoseq_stats`) operan
 
 ## Integración de resultados intermedios
 
-Una vez generadas las tablas individuales, con la siguiente rule `combine_tables` se genera una tabla maestra con toda la información en un único archivo en formato tabular. Snakemake asegura que esta regla no se ejecute hasta que se hayan producido todas las tablas de entradas necesarias para generar esta tabla maestra. Asimismo, si alguna tabla cambia o se agrega un FASTA nuevo, únicamente las etapas afectadas serán reevaluadas, evitando la re-ejecución completa del workflow, de esta manera se ahorra capacidad de procesamiento.
+Una vez generadas las tablas individuales, con la siguiente regla `combine_tables` se genera una tabla maestra con toda la información en un único archivo en formato tabular. Snakemake asegura que esta regla no se ejecute hasta que se hayan producido todas las tablas de entradas necesarias para generar esta tabla maestra. Asimismo, si alguna tabla cambia o se agrega un FASTA nuevo, únicamente las etapas afectadas serán reevaluadas, evitando la re-ejecución completa del workflow, de esta manera se ahorra capacidad de procesamiento.
 
 ## Análisis de frecuencias de nucleótidos
 
@@ -94,9 +94,11 @@ En esta sección se utiliza extensivamente el mecanismo de **wildcards**, tanto 
 
 Finalmente, se incluye una instrucción para mover los resultados generados al directorio de salida del pipeline, ya que el script que llama la regla, guarda los archivos en el directorio de ejecución del snakefile. Este paso asegura consistencia en la estructura de resultados. Además, evita el conflicto con los argumentos que se definieron en la regla.
 
-6. Generación de gráficos
+## Generación de gráficos
 
-Mediante las reglas plot_stats y plot_frequency, Snakemake ejecuta scripts en R que producen visualizaciones asociadas a los datos combinados y a las frecuencias nucleotídicas. Estas reglas dependen explícitamente de las tablas previas, por lo que Snakemake garantiza su actualización solo cuando los datos hayan cambiado. Este comportamiento incrementa significativamente la eficiencia del pipeline, especialmente en análisis iterativos.
+Mediante las reglas "`plot_stats`" y "`plot_frequency`", Snakemake ejecuta scripts en R que producen diferentes visualizaciones basados en la tablas combinadas de longitud de secuencia, contenido de GC y frecuencias nucleotídicas. Estas reglas son totlamnete dependientes de las tablas generadas en etapas anteriores, por lo que Snakemake garantiza su actualización solo cuando los datos de entrada hayan cambiado.
+
+Este comportamiento dirigido por dependencias aporta una gran eficiencia al pipeline, especialmente en análisis iterativos o cuando se trabaja con un volumen elevado de datos, ya que evita la regeneración innecesaria de gráficos.
 
 7. Construcción del reporte final
 
