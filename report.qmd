@@ -16,9 +16,11 @@ editor: visual
 
 # Resumen
 
-Este informe resume las métricas de longitud y porcentaje de recolección de residuos (GC%) de todos los archivos FASTA procesados. Todos los gráficos y resúmenes se adaptan automáticamente al número de archivos presentes en data. ---
+Este informe resume las métricas de longitud y porcentaje de recolección de residuos (GC%) de todos los archivos FASTA procesados. Todos los gráficos y resúmenes se adaptan automáticamente al número de archivos presentes en data. 
 
-# Cargamos y ploteamos los datos
+---
+
+## Cargamos y ploteamos los datos de GC y largo de secuencia
 
 ```{r}
 suppressPackageStartupMessages({
@@ -125,4 +127,74 @@ p_len <- plot_violin_length(combined, "genome", "Genome size", "length")
 p_gc
 
 p_len
+```
+
+## Otra forma de visualizar los mismos datos
+
+```{r}
+
+# Length distribution (overlapped)
+
+ggplot(combined, aes(length, fill = file)) +
+geom_histogram(alpha = 0.5, bins = 40, position = "identity") +
+labs(
+title = "Length distribution per FASTA",
+x = "Sequence length (bp)",
+y = "Count"
+) +
+theme_minimal()
+
+# Length distribution (facet per FASTA)
+
+ggplot(combined, aes(length)) +
+geom_histogram(bins = 40, fill = "steelblue") +
+facet_wrap(~ file, scales = "free_y") +
+labs(
+title = "Length distribution by FASTA (faceted)",
+x = "Sequence length (bp)",
+y = "Count"
+) +
+theme_minimal()
+
+# GC% distribution density plot
+
+ggplot(combined, aes(gc_percent, fill = file)) +
+geom_density(alpha = 0.6) +
+labs(
+title = "GC% distribution per FASTA",
+x = "GC Percentage",
+y = "Density"
+) +
+theme_minimal()
+
+# Boxplots (GC% and Length per FASTA)
+# Length boxplot
+
+ggplot(combined, aes(file, length, fill = file)) +
+geom_boxplot(alpha = 0.8) +
+labs(title = "Length distribution per FASTA",
+x = "FASTA file",
+y = "Length (bp)") +
+theme_minimal()
+
+# GC% boxplot
+
+ggplot(combined, aes(file, gc_percent, fill = file)) +
+geom_boxplot(alpha = 0.8) +
+labs(title = "GC% distribution per FASTA",
+x = "FASTA file",
+y = "GC Percentage") +
+theme_minimal()
+
+# GC% vs Length scatterplot
+
+ggplot(combined, aes(gc_percent, length, color = file)) +
+geom_point(alpha = 0.7) +
+labs(
+title = "GC% vs Length per FASTA",
+x = "GC Percentage",
+y = "Length (bp)"
+) +
+theme_minimal()
+
 ```
