@@ -77,6 +77,7 @@ rule frequency_analysis:
         mv results/frequency/{wildcards.atype}_{wildcards.atype}_frequencies.tsv {output}
         """
 
+#-------------------- plotting rules------------------------
 # create gc and length plot in pdf format
 #  generate summary plot
 rule plot_stats:
@@ -96,6 +97,8 @@ rule plot_frequency:
         "results/plots/{atype}_combined.pdf"
     script:
         "scripts/plot_frequency.R"
+
+#------------------------------------------------------------------
 
 # generate report web site using quarto
 rule report:
