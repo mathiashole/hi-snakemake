@@ -16,9 +16,7 @@ editor: visual
 
 # Resumen
 
-Este informe resume las métricas de longitud y porcentaje de recolección de residuos (GC%) de todos los archivos FASTA procesados.
-Todos los gráficos y resúmenes se adaptan automáticamente al número de archivos presentes en data.
----
+Este informe resume las métricas de longitud y porcentaje de recolección de residuos (GC%) de todos los archivos FASTA procesados. Todos los gráficos y resúmenes se adaptan automáticamente al número de archivos presentes en data. ---
 
 # Cargamos y ploteamos los datos
 
