@@ -100,7 +100,7 @@ Mediante las reglas "`plot_stats`" y "`plot_frequency`", Snakemake ejecuta scrip
 
 Este comportamiento dirigido por dependencias aporta una gran eficiencia al pipeline, especialmente en análisis iterativos o cuando se trabaja con un volumen elevado de datos, ya que evita la regeneración innecesaria de gráficos.
 
-7. Construcción del reporte final
+## Construcción del reporte final
 
 El workflow concluye con la compilación de un reporte en formato HTML mediante Quarto. Snakemake supervisa que tanto los resultados numéricos como las figuras necesarias estén disponibles previo a la generación del reporte. Gracias al manejo automático de dependencias, cualquier modificación en los datos de entrada o en los pasos previos resulta en la actualización del documento final, asegurando consistencia entre análisis y reporte.
 
