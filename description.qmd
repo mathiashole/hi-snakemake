@@ -39,9 +39,9 @@ format:
 
 # Descripción del Pipeline y Principios de Ejecución mediante Snakemake
 
-El workflow implementado se organiza mediante Snakemake, un sistema de gestión de flujos reproducibles el cual se utiliza para analisis de bioinformática. Snakemake permite estructurar un conjunto de tareas dependientes entre sí, garantizando reproducibilidad, escalabilidad y actualización automática de resultados. El enfoque principal se basa en describir qué archivos deben ingresar y cuales deben obtenerse y dejar que Snakemake determine cómo generarlos, ejecutando solamente los pasos necesarios en función de las dependencias entre reglas.
+El workflow implementado se organiza mediante Snakemake, un sistema de gestión de flujos reproducibles el cual se utiliza ampliamente para los analisis bioinformáticos. Snakemake permite estructurar un conjunto de tareas dependientes entre sí, garantizando reproducibilidad, escalabilidad y actualización automática de resultados. El enfoque principal se basa en describir qué archivos deben ingresar y cuales deben obtenerse y dejar que Snakemake determine cómo generarlos, ejecutando solamente los pasos necesarios en función de las dependencias entre reglas.
 
-Este workflow se crea a partir de ciertos análisis de mi maestría, los cuales son utilizados durante el proyecto para crear un sitio web. Sin enbargo, no se incluye la totalidad de los análisis originales.
+En este contexto, el presente workflow se crea a partir de ciertos análisis que se desprenden de mi pryecto de maestría, los cuales son utilizados durante el proyecto para crear un sitio web. Sin enbargo, no se incluye la totalidad de los análisis originales.
 
 Este workflow consta de 8 `rules`, una `rule` es una unidad que define un paso en el workflow. Se le debe especificar al menos un `input`, `output` y `comando` o `función` que debe ejecutar. Es similar a una función ya que encapsula y se le debe pasar ciertos argumentos, pero tiene un proposito distinto a una función. Las rules que utilizamos son:
 
@@ -53,6 +53,14 @@ Este workflow consta de 8 `rules`, una `rule` es una unidad que define un paso e
 - frequency_analysis
 - plot_frequency
 - report
+
+## Repositorio público
+
+El workflow está disponible en GitHub: https://github.com/mathiashole/hi-snakemake  
+Clonar: git clone https://github.com/mathiashole/hi-snakemake.git
+Descargar: wget https://github.com/mathiashole/hi-snakemake/archive/refs/heads/main.zip
+
+El repositorio contiene el Snakefile (archivo de ejecucion), scripts auxiliares (carpeta scripts), config.yaml y environment.yaml. Consulte el README para instalar dependencias (seqkit, infoseq, R/paquetes, Quarto) y las instrucciones de ejecución (p. ej. `snakemake --cores N`).
 
 ## 1. Configuración del entorno y detección automática de datos
 
