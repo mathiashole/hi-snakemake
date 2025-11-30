@@ -71,7 +71,9 @@ rule frequency_analysis:
     shell:
         """
         Rscript scripts/allFrequency.R --{wildcards.atype} {input} --output results/frequency/{wildcards.atype}
-
+        
+        mv out_high* results/frequency/ 
+        
         mv results/frequency/{wildcards.atype}_{wildcards.atype}_frequencies.tsv {output}
         """
 
