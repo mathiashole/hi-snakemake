@@ -1,0 +1,130 @@
+---
+title: "FASTA Metrics Report"
+format:
+  html:
+    output-file: report.html
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-folding: show
+    smooth-scroll: true
+    css: style.css
+execute:
+  echo: false
+editor: visual
+---
+
+# Resumen
+
+Este informe resume las métricas de longitud y porcentaje de recolección de residuos (GC%) de todos los archivos FASTA procesados.
+Todos los gráficos y resúmenes se adaptan automáticamente al número de archivos presentes en data.
+---
+
+# Cargamos y ploteamos los datos
+
+```{r}
+suppressPackageStartupMessages({
+library(tidyverse)
+library(pheatmap)
+library(ggplot2)
+library(ggridges)
+library(ggbeeswarm)
+library(cowplot)
+library(dplyr)})
+
+
+
+combined <- read_tsv("results/tables/combined_table.tsv") %>%
+  rename(
+    gc_percent = gc,
+    length = length
+  )
+
+combined$file <- factor(combined$file)
+
+combined$file <- sapply(combined$file, function(x) {
+    x <- sub(".*Tcruzi", "", x)      # quita prefijo
+    x <- sub("2018$", "", x)         # si termina en 2018, lo borra
+    x <- sub("\\.fasta.*$", "", x)   # quita extensión
+    return(x)
+})
+
+summary_tbl <- combined %>%
+  group_by(file) %>%
+  summarise(
+    n_sequences = n(),
+    mean_length = mean(length),
+    median_length = median(length),
+    sd_length = sd(length),
+    p25_length = quantile(length, 0.25),
+    p75_length = quantile(length, 0.75),
+    mean_gc = mean(gc_percent),
+    median_gc = median(gc_percent),
+    sd_gc = sd(gc_percent),
+    p25_gc = quantile(gc_percent, 0.25),
+    p75_gc = quantile(gc_percent, 0.75)
+  )
+
+##
+
+### Plot function for GC violin ###
+plot_violin_gc <- function(data, plot_title, y_label) {
+  data$file <- factor(data$file, levels = sort(unique(data$file)))
+
+  count_data <- data %>%
+    group_by(file) %>%
+    summarise(count = n(), .groups = "drop")
+
+  ggplot(data, aes(x = file, y = gc_percent, fill = file)) +
+    geom_violin(alpha = 0.7, width = 0.5, show.legend = FALSE) +
+    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, show.legend = FALSE) +
+    scale_fill_brewer(palette = "Dark2") +
+    geom_text(data = count_data,
+              aes(x = file, y = max(data$gc_percent, na.rm = TRUE) * 1.05,
+                  label = count),
+              vjust = 0, color = "black", size = 3.5) +
+    labs(title = plot_title, y = y_label) +
+    theme_minimal() +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
+}
+
+### Plot function for length ###
+plot_violin_length <- function(data, type, plot_title, x_label) {
+  data$file <- factor(data$file, levels = sort(unique(data$file)))
+
+  plot_data <- data %>%
+    group_by(file) %>%
+    mutate(count = n(),
+           median_length = median(length)) %>%
+    ungroup()
+
+  label_data <- plot_data %>%
+    distinct(file, .keep_all = TRUE)
+
+  p <- ggplot(plot_data, aes(length, file, color = file)) +
+    geom_quasirandom(groupOnX = FALSE, show.legend = FALSE,
+                     size = 1, dodge.width = 0.9, alpha = 0.4) +
+    labs(title = plot_title, x = x_label) +
+    theme_minimal() +
+    scale_color_brewer(palette = "Dark2") +
+    geom_text(data = label_data,
+              aes(x = Inf, y = file, label = count),
+              hjust = -0.2, color = "black", size = 3.5) +
+    coord_cartesian(clip = "off")
+
+  if (type == "genome") {
+    p <- p + scale_x_log10()
+  } else {
+    p <- p + scale_x_continuous(expand = expansion(mult = c(0.05, 0.2)))
+  }
+
+  return(p)
+}
+
+p_gc <- plot_violin_gc(combined, "Genome GC%", "gc_percent")
+p_len <- plot_violin_length(combined, "genome", "Genome size", "length")
+
+p_gc
+
+p_len
+```
