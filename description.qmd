@@ -70,7 +70,7 @@ Este repositorio trae consigo un archivo `environment.yaml`, este es un archivo 
 
 El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función **glob_wildcards()** para buscar de manera automática todos los archivos que terminan en `.fasta` y que esten presentes en el directorio `data/`. La expresion utilizada `data/{fname}.fasta` extrae la parte variable `fname` guardandola en una lista `FNAME`. Permitiendo asi, que el análisis incorpore nuevos archivos sin necesidad de modificar nada de codigo.
 
-La lista completa de archivos se reconstruye con **expand()**, y parámetros como el tipo de análisis se extraen directamente desde el archivo de configuración, manteniendo el pipeline flexible, reproducible y fácil de extender.
+Por otro lado, generamos una lista completa de fastas con **expand()**, haciendo uso de la variable `{fname}` se genera la lista guardandola en la variable `FASTA`. Ademas, para poder reutilizar una misma rule se uso parámetros como el tipo de análisis de frecuencia, que se extraen directamente desde el archivo de configuración, manteniendo el pipeline flexible, reproducible y fácil de extender.
 
 Asimismo, los parámetros definidos en el archivo de configuración denominado **config.yaml** permiten controlar aspectos del análisis (por ejemplo, el tipo de frecuencia nucleotídica a calcular) sin editar el código del pipeline.
 
