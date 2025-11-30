@@ -1,2 +1,5 @@
-
 project_name: "basic_fasta_analysis"
+
+analysis:
+  - dinucleotide
+  - trinucleotide
