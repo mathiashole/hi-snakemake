@@ -49,6 +49,8 @@ snakemake --cores 10
 ```
 Esto ejecutará el pipeline utilizando 10 núcleos de procesamiento. Puedes ajustar el número de núcleos según la capacidad de tu máquina.
 
+<img align="center" src="docs/dag.svg" width="800">
+
 Para obtener un reporte detallado de la ejecución del pipeline, puedes agregar la opción `--dag` para generar un gráfico del flujo de trabajo:
 ```{bash, eval = FALSE}
 snakemake --cores 10 --dag | dot -Tsvg > dag.svg
