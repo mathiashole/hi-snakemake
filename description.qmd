@@ -68,11 +68,13 @@ Para el correcto funcionamiento es necesaria la instalación de `Pixi`, una herr
 
 Este repositorio trae consigo un archivo `environment.yaml`, este es un archivo en formato YAML usado para administrar entornos de software, más comúnmente para el administrador de paquetes de Conda. Especifica el nombre, las dependencias y los canales del entorno, permitiendo a los usuarios recrear un entorno idéntico en diferentes máquinas. En este contexto, `channels` son los sitios donde Conda descarga los paquetes que necesita para el entorno, son repositorios que contienen programas y librerias. `Dependencies` son los programas y librerias que queremos que se instalen desde estos repositorios.
 
-El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función **glob_wildcards()** para buscar de manera automática todos los archivos que terminan en `.fasta` y que esten presentes en el directorio `data/`. Permitiendo asi, que el análisis incorpore nuevos archivos sin necesidad de modificar el Snakefile, haciendo al workflow adaptable y escalable.
+El pipeline inicia declarando un archivo de configuración (config.yaml) y emplea la función **glob_wildcards()** para buscar de manera automática todos los archivos que terminan en `.fasta` y que esten presentes en el directorio `data/`. La expresion utilizada `data/{fname}.fasta` extrae la parte variable `fname` guardandola en una lista `FNAME`. Permitiendo asi, que el análisis incorpore nuevos archivos sin necesidad de modificar nada de codigo.
+
+La lista completa de archivos se reconstruye con **expand()**, y parámetros como el tipo de análisis se extraen directamente desde el archivo de configuración, manteniendo el pipeline flexible, reproducible y fácil de extender.
 
 Asimismo, los parámetros definidos en el archivo de configuración denominado **config.yaml** permiten controlar aspectos del análisis (por ejemplo, el tipo de frecuencia nucleotídica a calcular) sin editar el código del pipeline.
 
-## 2. Definición global del workflow
+## Definición global del workflow
 
 La regla principal (rule `all`) especifica los archivos que representan los resultados finales del análisis (`output`), estos son tablas individuales y combinadas, gráficos guardados en formato PDF, salidas del análisis de frecuencia de dinucleótidos, trinucleótidos y un reporte final en formato HTML, asociado a documentos css, imagenes y javascript. Snakemake construye automáticamente un grafo acíclico dirigido (DAG) que describe todas las dependencias necesarias para producir dichos resultados. De esta forma, el flujo se ejecuta de manera ordenada, asegurando que cada paso se lleve a cabo únicamente cuando las entradas requeridas están disponibles.
 
