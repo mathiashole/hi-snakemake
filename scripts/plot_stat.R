@@ -79,27 +79,3 @@ final_plot <- cowplot::plot_grid(p_gc, p_len, ncol = 1, rel_heights = c(1, 1))
 # Save
 ggsave(filename = snakemake@output[[1]], plot = final_plot, width = 7, height = 10)
 
-
-# library(ggplot2)
-
-# df <- read.table(snakemake@input[[1]], header=TRUE, sep="\t")
-
-# p <- ggplot(df, aes(x = gc, y = length)) +
-#   geom_point() +
-#   theme_minimal() +
-#   labs(title = "GC% vs length", x = "GC%", y = "Sequence length")
-
-# ggsave(filename = snakemake@output[[1]], plot = p)
-
-
-# library(ggplot2)
-
-# df <- read.table(snakemake@input[[1]], header=TRUE, sep="\t")
-
-# p <- ggplot(df, aes(x=gc, y=length)) +
-#   geom_point() +
-#   theme_minimal() +
-#   labs(title="GC% vs length", x="GC%", y="Sequence length")
-
-# ggsave(filename=snakemake@output[[1]], plot=p)
-
